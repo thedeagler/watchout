@@ -2,14 +2,17 @@
 var enemyPositions = [   ];
 var playerPosition = [  ]
 
-for(var i = 0; i < 10; i++) {
-	enemyPositions.push([Math.random() * 600, Math.random() * 400]);
+// Initialize 10 enemy dots with x,y-coordinates
+generateEnemyPositions();
+function generateEnemyPositions() {
+	for(var i = 0; i < 10; i++) {
+		enemyPositions[i] = [Math.random() * 600, Math.random() * 400];
+	}
 }
 
 
 // add enemies
 // draw svg circle enemies on svg board
-
 d3.select('.board').selectAll('circle')
 .data(enemyPositions)
 .enter()
@@ -19,13 +22,20 @@ d3.select('.board').selectAll('circle')
 .attr('cx', function(d) { return d[0] })
 .attr('cy', function(d) { return d[1] }); 
 
-
-
-
-
-
 // make it so enemies move to a new random location every second
 
+function update() {
+	generateEnemyPositions();
+	var enemies = d3.select('.board').selectAll('circle')
+	.data(enemyPositions)
+	.transition()
+	.attr('cx', function(d) { return d[0] })
+	.attr('cy', function(d) { return d[1] })
+	.duration(1000)
+	.ease('bounce-in')
+}
+
+setInterval(update, 900);
 
 
 // make a differently colored dot to represent the player, make it draggle
