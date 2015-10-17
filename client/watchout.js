@@ -10,7 +10,6 @@ var currentScore = 0;
 var numCollisions = 0;
 var numEnemies = 0;
 var on = 0;
-var title = d3.select('.title');
 
 
 /***********************************
@@ -37,25 +36,23 @@ function dragged(d) {
 ***********************************/
 
 // Draw player restriction
-d3.select('.board').append('rectangle').attr('class', 'playerBound')
-  .
+// d3.select('.board').append('rectangle').attr('class', 'playerBound')
+//   .
 
 // Init the board with titles and players
 function initialize() {
-  title.attr('class', '');
+  var title = d3.select('.title');
+  var titleWidth = d3.select('.title').node().getBoundingClientRect().width;
+  var titleHeight = d3.select('.title').node().getBoundingClientRect().height;
+  title.attr('class', 'title')
+  // title.style({'left': (window.innerWidth - titleWidth) / 2 + 'px'});
+  // debugger;
   // Present Title
   title.classed('zoomInUp animated', true);
   setTimeout(function() {
     title.classed('zoomInUp animated', false);
     title.classed('zoomOutUp animated', true);
   }, 2000);
-
-  // Draw the player dot
-  d3.select('.board').append('circle').classed('player', true)
-    .attr('transform', 'translate(' + playerPosition[0] + ',' + playerPosition[1] + ')')
-    .attr('r', PLAYER_RADIUS)
-    .attr('fill', PLAYER_COLOUR)
-    .call(drag);
 
   // Generate enemy positions
   generateEnemyPositions();
@@ -200,6 +197,13 @@ function tweenWithCollisionDetection(endData) {
 
 ***********************************/
 initialize();
+
+  // Draw the player dot
+  d3.select('.board').append('circle').classed('player', true)
+    .attr('transform', 'translate(' + playerPosition[0] + ',' + playerPosition[1] + ')')
+    .attr('r', PLAYER_RADIUS)
+    .attr('fill', PLAYER_COLOUR)
+    .call(drag);
 
 // call update function every 2 seconds
 setInterval(update, 2000);
