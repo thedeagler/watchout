@@ -2,20 +2,23 @@
 <html>
 <head>
   <link rel='stylesheet' type='css' href='styles.css'>
+  <link rel='stylesheet' type='css' href='lib/animate.css'>
   <script src="lib/d3.js" charset="utf-8"></script>
+  <link href='https://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <div class="scoreboard">
-    <!-- Modify the scoreboard when important events occur in your game! -->
-    <div class="highscore">High score: <span>0</span></div>
-    <div class="current">Current score: <span>0</span></div>
-    <!-- <div class="collisions">Collisions: <span>0</span></div> -->
-  </div>
-  <svg class="board" width='600' height='400'>
-    <!-- cx='300' cy='200' r='25' -->
-    <!-- <circle class="mouse"></circle> -->
-  </svg>
-  <div class='enemyPos'></div>
+  <container class="game">
+    <h1 class="title">watch out!</h1>
+    <h1 class="over hidden"> game over!</h1>
+    <svg class="board"></svg>
+    <div class="scoreboard">
+      <!-- Modify the scoreboard when important events occur in your game! -->
+      <div class="highscore">High score: <span>0</span></div>
+      <div class="current">Current score: <span>0</span></div>
+      <div class="collisions">Collisions: <span>0</span></div>
+    </div>
+  </container>
+
   <script src='watchout.js'></script>
 </body>
 </html>
