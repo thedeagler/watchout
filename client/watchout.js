@@ -35,24 +35,43 @@ function dragged(d) {
 
 ***********************************/
 
+// Hide container when done presenting text. Redraw container when necessary
+
 // Draw player restriction
 // d3.select('.board').append('rectangle').attr('class', 'playerBound')
 //   .
 
 // Init the board with titles and players
 function initialize() {
-  var title = d3.select('.title');
-  var titleWidth = d3.select('.title').node().getBoundingClientRect().width;
-  var titleHeight = d3.select('.title').node().getBoundingClientRect().height;
-  title.attr('class', 'title')
-  // title.style({'left': (window.innerWidth - titleWidth) / 2 + 'px'});
-  // debugger;
-  // Present Title
-  title.classed('zoomInUp animated', true);
-  setTimeout(function() {
-    title.classed('zoomInUp animated', false);
+  // Create title text
+  d3.select('.game').selectAll('container')
+    .data(['texts'])
+    .enter()
+    .append('container')
+    .attr('class', function(d) {console.log("container made"); return d;})
+
+  var title = d3.select('.texts').selectAll('h1')
+    .data(['title'])
+    .enter()
+    .append('h1')
+    .attr('class', function(d) {console.log('title made'); return d;})
+    .text('watch out!')
+    .classed('zoomInUp animated', true);
+
+  setTimeout(function(){
+    title.classed('zoomInUp animated', false)
     title.classed('zoomOutUp animated', true);
   }, 2000);
+
+
+  // var title = d3.select('.title');
+  // title.attr('class', 'title')
+  // // Present Title
+  // title.classed('zoomInUp animated', true);
+  // setTimeout(function() {
+  //   title.classed('zoomInUp animated', false);
+  //   title.classed('zoomOutUp animated', true);
+  // }, 2000);
 
   // Generate enemy positions
   generateEnemyPositions();
@@ -72,6 +91,8 @@ function initialize() {
     .attr('cy', function(d) {
       return d[1];
     });
+
+  // Hide title text
 }
 
 // Update the board
