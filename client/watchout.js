@@ -63,6 +63,8 @@ function initialize() {
     title.classed('zoomOutUp animated', true);
   }, 2000);
 
+  // d3.select('.texts').remove();
+
 
   // var title = d3.select('.title');
   // title.attr('class', 'title')
