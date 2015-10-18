@@ -35,12 +35,6 @@ function dragged(d) {
 
 ***********************************/
 
-// Hide container when done presenting text. Redraw container when necessary
-
-// Draw player restriction
-// d3.select('.board').append('rectangle').attr('class', 'playerBound')
-//   .
-
 // Init the board with titles and players
 function initialize() {
   // Create title text
