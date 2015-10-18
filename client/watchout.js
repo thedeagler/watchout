@@ -48,32 +48,23 @@ function initialize() {
     .data(['texts'])
     .enter()
     .append('container')
-    .attr('class', function(d) {console.log("container made"); return d;})
+    .attr('class', function(d) {return d;})
 
   var title = d3.select('.texts').selectAll('h1')
     .data(['title'])
     .enter()
     .append('h1')
-    .attr('class', function(d) {console.log('title made'); return d;})
+    .attr('class', function(d) {return d;})
     .text('watch out!')
     .classed('zoomInUp animated', true);
 
   setTimeout(function(){
     title.classed('zoomInUp animated', false)
     title.classed('zoomOutUp animated', true);
+    setTimeout(function() {
+      d3.select('.texts').remove();
+    }, 1000);
   }, 2000);
-
-  // d3.select('.texts').remove();
-
-
-  // var title = d3.select('.title');
-  // title.attr('class', 'title')
-  // // Present Title
-  // title.classed('zoomInUp animated', true);
-  // setTimeout(function() {
-  //   title.classed('zoomInUp animated', false);
-  //   title.classed('zoomOutUp animated', true);
-  // }, 2000);
 
   // Generate enemy positions
   generateEnemyPositions();
@@ -93,8 +84,6 @@ function initialize() {
     .attr('cy', function(d) {
       return d[1];
     });
-
-  // Hide title text
 }
 
 // Update the board
@@ -180,10 +169,29 @@ function collisionHandler() {
   // Set text elements
   d3.select('.current').select('span').text(0);
 
-  d3.select('.over').attr('class', '').attr('class', 'over zoomInUp animated');
-  setTimeout(function() {
-    d3.select('.over').attr('class', '').attr('class', 'over zoomOutUp animated');
-  }, 1000)
+  // Show gameover text
+  // Create title text
+  d3.select('.game').selectAll('container')
+    .data(['texts'])
+    .enter()
+    .append('container')
+    .attr('class', function(d) {return d;})
+
+  var title = d3.select('.texts').selectAll('h1')
+    .data(['gameover'])
+    .enter()
+    .append('h1')
+    .attr('class', function(d) {return d;})
+    .text('game over!')
+    .classed('zoomInUp animated', true);
+
+  setTimeout(function(){
+    title.classed('zoomInUp animated', false)
+    title.classed('zoomOutUp animated', true);
+    setTimeout(function() {
+      d3.select('.texts').remove();
+    }, 1000);
+  }, 2000);
 
   // Reinit gameboard
   setTimeout(initialize, 2000);
